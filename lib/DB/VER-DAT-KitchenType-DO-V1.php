@@ -1,5 +1,11 @@
 <?php
 
+/*
+KITCHENTYPE TYPES:
+(1) C - cuisine
+(2) T - type of dish
+*/
+
 class kitchenType{
     private $connection; 
 

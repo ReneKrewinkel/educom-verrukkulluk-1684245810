@@ -1,5 +1,13 @@
 <?php
 
+/*
+RECIPEINFO TYPES:
+(1) R - rating
+(2) W - written review
+(3) F - favorites
+(4) S - steps
+*/
+
 class recipeInfo{
     private $connection; 
 
@@ -72,6 +80,46 @@ class recipeInfo{
         }
 
         return false;
+    }
+
+    public function getReviews($recipe_id){
+        $sql = "select * from `recipeinfo` where `recipeID` = '$recipe_id' and `optionType` = 'W';"; 
+
+        $result = mysqli_query($this->connection, $sql);
+        for($i = 0; $allReviews[$i] = mysqli_fetch_assoc($result); $i++);
+        array_pop($allReviews);
+        
+        return($allReviews);
+    }
+
+    public function getRatings($recipe_id){
+        $sql = "select * from `recipeinfo` where `recipeID` = '$recipe_id' and (`optionType` = 'W' or `optionType` = 'R');"; 
+
+        $result = mysqli_query($this->connection, $sql);
+        for($i = 0; $allRatings[$i] = mysqli_fetch_assoc($result); $i++);
+        array_pop($allRatings);
+        
+        return($allRatings);
+    }
+
+    public function getSteps($recipe_id){
+        $sql = "select * from `recipeinfo` where `recipeID` = '$recipe_id' and `optionType` = 'S';"; 
+
+        $result = mysqli_query($this->connection, $sql);
+        for($i = 0; $allSteps[$i] = mysqli_fetch_assoc($result); $i++);
+        array_pop($allSteps);
+        
+        return($allSteps);
+    }
+
+    public function getFavorites($recipe_id){
+        $sql = "select * from `recipeinfo` where `recipeID` = '$recipe_id' and `optionType` = 'F';"; 
+
+        $result = mysqli_query($this->connection, $sql);
+        for($i = 0; $allSteps[$i] = mysqli_fetch_assoc($result); $i++);
+        array_pop($allSteps);
+        
+        return($allSteps);
     }
 }
 

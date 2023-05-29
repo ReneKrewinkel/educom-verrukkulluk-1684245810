@@ -28,8 +28,8 @@ class recipeIngredient{
         return($recipeIngredient);
     }
 
-    public function getAllIngredients($recipe){
-        $sql = "select * from `recipeIngredient` where `recipeID` = $recipe;";
+    public function getAllIngredients($recipe_id){
+        $sql = "select * from `recipeIngredient` where `recipeID` = $recipe_id;";
         
         $result = mysqli_query($this->connection, $sql);
         for($i = 0; $allIngredients[$i] = mysqli_fetch_assoc($result); $i++) ;

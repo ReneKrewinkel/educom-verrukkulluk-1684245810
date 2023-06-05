@@ -1,5 +1,71 @@
 {% extends "main.html.twig" %}
 
 {% block header %}
-<h1>Hallo Bram</h1>
+<div class="navbar">
+    <img src="assets/img/logo-v2.png"/>
+    <div class="content">
+        <div class= "input-icons">
+            <i class="fa fa-search icon"></i>
+            <input class="input-field " type="search" placeholder="Search">
+        </div>
+        <i class="fa fa-bars"></i>
+    </div>
+</div>
 {% endblock %}
+
+{# details on recipe #}
+{% block content %}
+    <div class="detContainer"> 
+        <div class="card">
+            <img src=" {{ data.picFood }} " />
+            <div class="content">
+                <div class="details">
+                    <i class="fa fa-user-friends"> {{ data.people }} </i>
+                    <i class="fa fa-euro-sign"> {{ data.price }} </i>
+                    <i class="fa fa-fire"> {{ data.calories }} </i>
+                </div>
+                <div class="seperate">
+                    <h4> {{ data.title }} </h4>
+                    <i data-star="{{ data.rating }}"></i>
+                </div>
+                <p class="description"> {{ data.description }} </p>
+                <div class="seperate">
+                    <button class="button" type="submit"> ADD </button>
+                    <i class="fa fa-heart favorite"></i>
+                </div>
+            </div>
+        </div>
+        <div class="extra">
+            
+            <div class="options">
+                <span class="type active"><p>Ingredients</p></span>
+                <span class="type"><p>Steps</p></span>
+                <span class="type"><p>Reviews</p> </span>
+            </div>
+            <div class="container">
+                <div class="content">
+                    <p>Tempor eiusmod et laborum excepteur veniam adipisicing consequat sunt et exercitation ipsum ullamco eiusmod. Pariatur ad nisi pariatur minim irure est proident culpa. Quis magna incididunt duis esse quis consequat id duis aliquip dolore voluptate adipisicing ad. Enim dolore nisi et ullamco eiusmod sit adipisicing veniam velit quis laborum veniam. Excepteur duis excepteur nostrud tempor sit labore commodo est nulla dolor.</p>
+                </div>
+            </div>
+            
+
+            {# shows ingredients #}
+            {% if option == 0 %}
+                
+            {% endif %}
+
+            {# shows steps #}
+            {% if option == 1 %}
+
+            {% endif %}
+
+            {# shows comments #}
+            {% if option == 2 %}
+
+            {% endif %}
+        </div>
+    </div>
+
+    <div></div>
+{% endblock %}
+

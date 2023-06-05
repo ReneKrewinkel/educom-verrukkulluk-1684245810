@@ -1,7 +1,7 @@
-<html lang="nl">
+<html lang="en">
 <head>
 
-    <title>het is verrukkuluk! :: {{ TITEL }} </title>
+    <title>het is verrukkuluk! :: {{ title }} </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css" />
@@ -27,14 +27,68 @@
 
     <div class="row">
         <div class="col-md-3">
-            <h2>Agenda</h2>
-            <i class="fa fa-calendar"></i> FontAwesome <a href="https://fontawesome.com/icons?d=gallery&m=free">Documentation</a><br>
-            <i class="fa fa-file-pdf"></i><a href="https://www.layoutit.com/build">Layout-it</a>
+            <div class="sideContent agenda">
+                <img src="assets\img\verrukkulluk-agenda.png"/>
+                
+                <div class="entry">
+                    <i class="fa fa-calendar"></i> 
+                    <div class="text">
+                        <h3>Vegan Session</h3>
+                        <p> Voluptate dolor cillum duis nostrud pariatur sit aute consequat cillum voluptate culpa anim. </p>
+                    </div>
+                </div>
 
+                <div class="entry">
+                    <i class="fa fa-calendar"></i> 
+                    <div class="text">
+                        <h3>Vegan Session</h3>
+                        <p> Voluptate dolor cillum duis nostrud pariatur sit aute consequat cillum voluptate culpa anim. </p>
+                    </div>
+                </div>
 
+                <div class="entry">
+                    <i class="fa fa-calendar"></i> 
+                    <div class="text">
+                        <h3>Vegan Session</h3>
+                        <p> Voluptate dolor cillum duis nostrud pariatur sit aute consequat cillum voluptate culpa anim. </p>
+                    </div>
+                </div>
+
+                <div class="entry">
+                    <i class="fa fa-calendar"></i> 
+                    <div class="text">
+                        <h3>Vegan Session</h3>
+                        <p> Voluptate dolor cillum duis nostrud pariatur sit aute consequat cillum voluptate culpa anim. </p>
+                    </div>
+                </div>
+
+                <div class="entry">
+                    <i class="fa fa-calendar"></i> 
+                    <div class="text">
+                        <h3>Vegan Session</h3>
+                        <p> Voluptate dolor cillum duis nostrud pariatur sit aute consequat cillum voluptate culpa anim. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sideContent login">
+                <img src="assets\img\verrukkulluk-login.png"/>
+                <form>
+                    <div class= "input-icons margin10">
+                        <i class="fa fa-user icon"></i>
+                        <input class="input-field " type="text" placeholder="username">
+                    </div>
+
+                    <div class= "input-icons margin10">
+                        <i class="fa fa-lock icon"></i>
+                        <input class="input-field " type="password" placeholder="password">
+                    </div>
+
+                    <button class="button" type="submit"> Log In </button>
+                </form>
+            </div>
         </div>
         <div class="col-md-9">
-            <h2>Content</h2>
             {%  block content %}
             {%  endblock %}
         </div>
@@ -43,7 +97,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1>Footer</h1>
+            <h1>Contact</h1>
         </div>
     </div>
 

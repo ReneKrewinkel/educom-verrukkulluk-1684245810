@@ -2,47 +2,57 @@
 {% extends "main.html.twig" %}
 
 {% block header %}
-<img src="assets/img/logo-v2.png"/>
+<div class="navbar">
+    <img src="assets/img/logo-v2.png"/>
+    <div class="content">
+        <div class= "input-icons">
+            <i class="fa fa-search icon"></i>
+            <input class="input-field " type="search" placeholder="Search">
+        </div>
+        <i class="fa fa-bars"></i>
+    </div>
+</div>
 {% endblock %}
 
 
 {# nu de block content op in de main pagina vullen #}
 {% block content %}
-    {# Dit is commentaar #}
-
-    {# Print #}
-    <h1>Heading #1</h1>
-    <h2>Heading #2</h2>
-    <h3>Heading #3 t/m 5</h3>
-
-    <h4>Dit is de template {{  title }}</h4>
 
 {# Loop #}
-    <ul>
-    {% for record in data %}
-        <li>
-            <img src="{{ record.foto }}" style="width: 100px; heigfht: 100px;">
+    <ul class="menu">
+    {% for recipe in data %}
+        <li class="col-md-6 card">
+            {# IMAGE #}
+            <img src=" {{ recipe.picFood }} ">
+            
+            {# TITLE & RATING #}
+            <div class="seperate">
+                <h4> {{ recipe.title }} </h4>
+                <i data-star="{{ recipe.rating }}"></i>
+            </div>
 
-            {{ record.title }}
-            {# sub-loop #}
-            <ul>
-                {% for ingr in record.ingredienten %}
-                    <li>
-                        <span {% if ingr.id < 2 %}style='color: #F00'{% endif %}>{{  ingr.naam }}</span>
+            {# DESCRIPTION #}
+            
+            <p class="description"> {{ recipe.description }} </p>
 
-                        {# if #}
-                        {%  if ingr.id == 3 %}
-                            <strong>Dit is ID 3!</strong>
-                        {%  endif  %}
-                    </li>
-                {% endfor %}
-            </ul>
+            {# BUTTON, PEOPLE, PRICE, CALORIES #}
+
+            <div class="seperate">
+                <button class="button" type="submit"> ADD </button>
+                <div class="details">
+                    <i class="fa fa-user-friends"> {{ recipe.people }} </i>
+                    <i class="fa fa-euro-sign"> {{ recipe.price }} </i>
+                    <i class="fa fa-fire"> {{ recipe.calories }} </i>
+                </div>
+            </div>
+            
         </li>
     {% endfor %}
     <ul>
      {# Dump #}
-       <pre>
+     {# <pre>
         {{ dump(data) }}
-       </pre>
+       </pre> 
+       #}
 
 {% endblock %}

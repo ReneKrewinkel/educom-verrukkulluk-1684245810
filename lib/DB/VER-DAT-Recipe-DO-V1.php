@@ -10,8 +10,8 @@ class Recipe{
         $this->dbManager = $dbManager;
     }
 
-    public function createRecipe($author_id, $kitchen_id, $type_id, $date, $title, $img, $people, $description){
-        $sql = "INSERT INTO `recipes` (`authorID`, `kitchenID`, `typeID`, `creationDate`, `title`, `picFood`, `people`, `description`) VALUES ('$author_id', '$kitchen_id', '$type_id', '$date', '$title', '$img', '$people', '$description')";
+    public function createRecipe($author_id, $kitchen_id, $type_id, $date, $title, $people, $description,  $img){
+        $sql = "INSERT INTO `recipes` (`authorID`, `kitchenID`, `typeID`, `creationDate`, `title`, `people`, `description`, `picFood`) VALUES ('$author_id', '$kitchen_id', '$type_id', '$date', '$title', '$people', '$description', '$img')";
 
         $query = mysqli_query($this->connection, $sql);
 
@@ -23,17 +23,80 @@ class Recipe{
     }
 
     public function getRecipe($recipe_id){
-        $sql = "select * from `recipes` where id = $recipe_id;";
+        $sql = "select * from `recipes` where id = '$recipe_id';";
         
         $result = mysqli_query($this->connection, $sql);
         $recipe = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
+        //GET INGREDIENTS
+        $ingredientIDs = $this->dbManager->recipeIngredient->getAllIngredients($recipe['id']);
+        $ingredients = array();
+        foreach($ingredientIDs as $ingredient_id){
+            array_push($ingredients, $this->dbManager->ingredient->getIngredient($ingredient_id['ingredientID']));
+        }
+
+        //GET PRICE 
+        $recipe['price'] = round($this->calcPrice($recipe['id']), 2); 
+
+        //GET CALORIES
+        $recipe['calories'] = round($this->calcCalories($recipe['id']), 0);
+
+        //GET RATING
+        $recipe['rating'] = round($this->getRating($recipe['id']), 1);
+
+        //GET AUTHOR
+        $recipe['author'] = $this->dbManager->user->getUser($recipe['authorID']);
+
+        //GET STEPS
+        $recipe['steps'] = $this->getSteps($recipe['id']);
+
+        //GET KITCHEN 
+        $recipe['kitchen'] = "hello";
+
+        //GET TYPE
+        $recipe['type'] = "world";
+
+        //GET REVIEWS
+        $recipe['reviews'] = $this->getReviews($recipe['id']);
+
         return($recipe);
     }
 
-    public function updateRecipe($recipe_id, $author_id, $kitchen_id, $type_id, $date, $title, $img, $people, $description){
+    public function getAllRecipe(){
+       //GET ALL RECIPES
+        $sql = "select * from `recipes`;";
+        
+        $result = mysqli_query($this->connection, $sql);
+        for($i = 0; $allRecipes[$i] = mysqli_fetch_assoc($result); $i++);
+        array_pop($allRecipes);
+
+        for($i = 0; $i< count($allRecipes); $i++){
+
+            //GET INGREDIENTS
+            $ingredientIDs = $this->dbManager->recipeIngredient->getAllIngredients($allRecipes[$i]['id']);
+            $ingredients = array();
+            foreach($ingredientIDs as $ingredient_id){
+                array_push($ingredients, $this->dbManager->ingredient->getIngredient($ingredient_id['ingredientID']));
+            }
+            $allRecipes[$i]['ingredients'] = $ingredients;
+
+            //GET PRICE 
+            $allRecipes[$i]['price'] = round($this->calcPrice($allRecipes[$i]['id']), 2); 
+
+            //GET CALORIES
+            $allRecipes[$i]['calories'] = round($this->calcCalories($allRecipes[$i]['id']), 0);
+
+            //GET RATING
+            $allRecipes[$i]['rating'] = round($this->getRating($allRecipes[$i]['id']), 1);
+        }
+
+
+        return($allRecipes);
+    }
+
+    public function updateRecipe($recipe_id, $author_id, $kitchen_id, $type_id, $date, $title, $people, $description, $img){
         $sql = "UPDATE `recipes` 
-        SET `authorID` = '$author_id', `kitchenID` = '$kitchen_id', `typeID` = '$type_id', `creationDate` = '$date', `title` = '$title', `picFood` = '$img', `people` = '$people', `description` = '$description'
+        SET `authorID` = '$author_id', `kitchenID` = '$kitchen_id', `typeID` = '$type_id', `creationDate` = '$date', `title` = '$title', `people` = '$people', `description` = '$description', `picFood` = '$img'
         WHERE `id` = '$recipe_id';";
 
         $query = mysqli_query($this->connection, $sql);
